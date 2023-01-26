@@ -6,7 +6,12 @@ import config.ProxyConfig;
 import http.HttpManager;
 import proxy.ProxyMode;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Actions {
+	
+	private static final Logger LOGGER = LogManager.getLogger(Actions.class);
 
 	/**
 	 * Test the connection with proxy settings
@@ -19,6 +24,7 @@ public class Actions {
 			HttpManager.get(url);
 			success = true;
 		} catch (IOException e) {
+			LOGGER.error("There is an error upon testing the connection ", e);
 			e.printStackTrace();
 			success = false;
 		}

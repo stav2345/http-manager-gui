@@ -23,7 +23,12 @@ import org.eclipse.swt.widgets.Text;
 import config.ProxyConfig;
 import proxy.ProxyMode;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ProxySettingsDialog extends Dialog {
+	
+	private static final Logger LOGGER = LogManager.getLogger(ProxySettingsDialog.class);
 	
 	private static final String TEST_CONN_URL = "http://www.google.com";
 	
@@ -121,6 +126,7 @@ public class ProxySettingsDialog extends Dialog {
 				try {
 					Actions.save(mode, hostname.getText(), port.getText());
 				} catch (IOException e) {
+					LOGGER.error("There is an error upon saving the configuration before testing", e);
 					e.printStackTrace();
 					return;
 				}
@@ -157,6 +163,7 @@ public class ProxySettingsDialog extends Dialog {
 				try {
 					Actions.save(mode, hostname.getText(), port.getText());
 				} catch (IOException e) {
+					LOGGER.error("There is an error upon saving the configuration ", e);
 					e.printStackTrace();
 				}
 				
